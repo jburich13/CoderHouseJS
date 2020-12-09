@@ -1,0 +1,95 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-color: #1A404F !important;
+}
+
+
+/* Color Theme Swatches in Hex */
+
+.blanco {
+    color: #F5F5F5;
+}
+
+.verde {
+    color: #5DC457;
+}
+
+.azul {
+    color: #1A404F;
+}
+
+.negro {
+    color: #000000;
+}
+
+.celeste {
+    color: #9FC5E1;
+}
+
+#misCursos {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#nav {
+    font-size: 2rem;
+    background-color: #9FC5E1;
+    width: 100%;
+    font-family: 'Arvo', serif;
+}
+
+li a {
+    color: #000000;
+}
+
+li:hover a {
+    color: #000000;
+}
+
+li {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+li:hover {
+    background-color: #8aacc0;
+    border: 1px solid black;
+}
+
+#card {
+    margin: 5rem;
+    background-color: #9FC5E1;
+    width: 30rem;
+    align-content: center;
+}
+
+#card h5 {
+    font-family: 'Arvo', serif;
+    font-size: 3rem;
+}
+
+#card p {
+    font-size: 2rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#boton {
+    margin-left: 3rem;
+    text-align: center;
+    background-color: #5DC457;
+    width: 20rem;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.5rem;
+}
+
+#boton:hover {
+    background-color: #96d693;
+}
+
+#text {}
