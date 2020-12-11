@@ -80,8 +80,9 @@ li:hover {
 }
 
 #boton {
-    margin-left: 3rem;
+    display: inline;
     text-align: center;
+    margin: 0.5rem;
     background-color: #5DC457;
     width: 20rem;
     font-family: 'Open Sans', sans-serif;
@@ -92,4 +93,4 @@ li:hover {
     background-color: #96d693;
 }
 
-#text {}
+.botonera {}
