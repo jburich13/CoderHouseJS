@@ -23,9 +23,26 @@ let misCursos = [
 
 
 let agregarCards = () => {
+
+    //Traigo el container
+    const container = document.getElementById("misCursos");
     misCursos.forEach(card => {
-        document.write(" <div class='card' id='card'>")
-        document.write(`<img src='src\\${card.img}' class='card-img-top' alt='...'>`)
+
+        //Creo el div de la tarjeta
+        let divCard = document.createElement("div");
+        divCard.setAttribute("class", "card");
+        divCard.setAttribute("id", "card");
+        //Agrego la imagen
+        let imgCard = document.createElement("img");
+        imgCard.src = `src\\${card.img}`;
+        divCard.appendChild(imgCard);
+        container.appendChild(divCard);
+
+
+
+
+        // document.write(" <div class='card' id='card'>")
+        // document.write(`<img src= class='card-img-top' alt='...'>`)
         document.write(" <div class='card-body'>")
         document.write(`<h5 class='card-title'>${card.titulo}</h5>`)
         document.write(`<p class='card-text' id='text'>${card.descripcion}</p>`)
