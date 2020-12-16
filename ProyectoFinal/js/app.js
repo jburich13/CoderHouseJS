@@ -1,7 +1,3 @@
-let usuario = Number(prompt("Ingrese la cantidad de cursos que desea: "));
-
-
-
 class Curso {
     constructor(titulo, img, descripcion) {
         this.titulo = titulo;
@@ -29,31 +25,64 @@ let agregarCards = () => {
     misCursos.forEach(card => {
 
         //Creo el div de la tarjeta
-        let divCard = document.createElement("div");
+        const divCard = document.createElement("div");
         divCard.setAttribute("class", "card");
         divCard.setAttribute("id", "card");
-        //Agrego la imagen
-        let imgCard = document.createElement("img");
-        imgCard.src = `src\\${card.img}`;
-        divCard.appendChild(imgCard);
         container.appendChild(divCard);
 
+        //Agrego la imagen
+        const imgCard = document.createElement("img");
+        imgCard.setAttribute("class", "card-img-top")
+        imgCard.src = `src\\${card.img}`;
+        divCard.appendChild(imgCard);
 
 
 
-        // document.write(" <div class='card' id='card'>")
-        // document.write(`<img src= class='card-img-top' alt='...'>`)
-        document.write(" <div class='card-body'>")
-        document.write(`<h5 class='card-title'>${card.titulo}</h5>`)
-        document.write(`<p class='card-text' id='text'>${card.descripcion}</p>`)
-        document.write("<div class='row'>")
-        document.write("<a href='#' class='btn col-5' id='boton'>Añadir al carrito</a>")
-        document.write("<a href='#' class='btn col-5' id='boton'>Eliminar del carrito</a>")
-        document.write("</div>")
-        document.write("</div>")
-        document.write("</div>")
+        //Agrego el body
+        const divBody = document.createElement("div");
+        divBody.setAttribute("class", "card-body");
+        divCard.appendChild(divBody);
+
+        //Agrego el titulo
+        const tituloCard = document.createElement("h5");
+        tituloCard.setAttribute("class", "card-title");
+        tituloCard.textContent = `${card.titulo}`;
+        divBody.appendChild(tituloCard);
+
+
+        //Agrego la descripcion
+        const descripcionCard = document.createElement("p");
+        descripcionCard.setAttribute("class", "card-title");
+        descripcionCard.setAttribute("id", "text");
+        descripcionCard.textContent = `${card.descripcion}`;
+        divBody.appendChild(descripcionCard);
+
+
+        //Agrego la linea de los botones
+        const rowBotones = document.createElement("div");
+        rowBotones.setAttribute("class", "row");
+        divBody.appendChild(rowBotones);
+
+
+        //Agrego los botones
+        const botonCard1 = document.createElement("a");
+        const botonCard2 = document.createElement("a");
+
+
+        //Boton 1
+        botonCard1.href = "#";
+        botonCard1.className = "btn col-5";
+        botonCard1.id = "boton";
+        botonCard1.textContent = "Añadir al carrito";
+        rowBotones.appendChild(botonCard1);
+
+        //Boton 2
+        botonCard2.href = "#";
+        botonCard2.className = "btn col-5";
+        botonCard2.id = "boton";
+        botonCard2.textContent = "Eliminar del carrito";
+        rowBotones.appendChild(botonCard2);
     });
-    alert(`Se agregaron ${usuario} tarjetas a la seccion Mis Cursos`)
 }
 
 agregarCards();
