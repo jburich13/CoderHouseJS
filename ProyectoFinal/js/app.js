@@ -65,11 +65,8 @@ let agregarCards = () => {
 
 
         //Agrego los botones
-        const botonCard1 = document.createElement("a");
-        const botonCard2 = document.createElement("a");
-
-
         //Boton 1
+        const botonCard1 = document.createElement("a");
         botonCard1.href = "#";
         botonCard1.className = "btn col-5";
         botonCard1.id = "boton";
@@ -77,6 +74,7 @@ let agregarCards = () => {
         rowBotones.appendChild(botonCard1);
 
         //Boton 2
+        const botonCard2 = document.createElement("a");
         botonCard2.href = "#";
         botonCard2.className = "btn col-5";
         botonCard2.id = "boton";
