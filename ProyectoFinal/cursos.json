@@ -1,0 +1,20 @@
+{
+    "Programacion": {
+        "titulo": "Programación",
+        "img": "teacher.jpg",
+        "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?"
+    },
+
+    "Diseño UX": {
+        "titulo": "Diseño Ux",
+        "img": "teacher.jpg",
+        "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?"
+    },
+
+    "Testing": {
+        "titulo": "Testing",
+        "img": "teacher.jpg",
+        "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?"
+    }
+
+}

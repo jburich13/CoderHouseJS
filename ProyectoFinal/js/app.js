@@ -18,6 +18,8 @@ let misCursos = [
 
 
 
+
+
 let agregarCards = () => {
 
     //Traigo el container
