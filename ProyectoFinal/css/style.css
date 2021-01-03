@@ -79,6 +79,10 @@ li:hover {
     font-family: 'Open Sans', sans-serif;
 }
 
+#precio {
+    font-size: 3rem !important;
+}
+
 #boton {
     display: inline;
     text-align: center;
@@ -93,4 +97,18 @@ li:hover {
     background-color: #96d693;
 }
 
-.botonera {}
+#precio {
+    font-size: 5rem;
+}
+
+.imgCarrito {
+    width: 4rem;
+    height: 4rem;
+    margin-top: 1rem;
+    margin-left: 80rem;
+}
+
+.numCarrito {
+    font-size: 2rem;
+    color: #000000;
+}
