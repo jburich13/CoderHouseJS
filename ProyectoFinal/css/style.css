@@ -128,3 +128,11 @@ li:hover {
 .itemsCarrito {
     margin-bottom: 2rem;
 }
+
+.totalAPagar {
+    font-size: 2rem;
+}
+
+.labelTotal {
+    font-size: 2rem;
+}

@@ -135,10 +135,16 @@ function agregarAlCarrito(event) {
     agregarAListaCompras(cursoTitle, cursoPrecio, cursoImg);
 }
 
+
+
+
+
+let total = 0;
+
 function agregarAListaCompras(cursoTitle, cursoPrecio, cursoImg) {
 
     const modalBody = document.querySelector(".modal-body");
-    const divModalBody = document.createElement("div");
+    const divModalBody = document.querySelector(".divModalBody")
     const rowModal = document.createElement("div");
     rowModal.setAttribute("class", "row align-items-center itemsCarrito");
 
@@ -153,20 +159,47 @@ function agregarAListaCompras(cursoTitle, cursoPrecio, cursoImg) {
     const precioCardModal = document.createElement("p");
     precioCardModal.setAttribute("class", "precioModal col-3");
     precioCardModal.textContent = cursoPrecio;
+    let precio = cursoPrecio.substring(1);
+    total += Number(precio);
+
     //Agregamos la img
     const imgCardModal = document.createElement("img");
     imgCardModal.setAttribute("src", cursoImg);
     imgCardModal.setAttribute("class", "imgModal col-3")
+
+
+
+
 
     rowModal.appendChild(imgCardModal);
     rowModal.appendChild(tituloCardModal);
     rowModal.appendChild(precioCardModal);
 
     divModalBody.appendChild(rowModal);
+
     modalBody.appendChild(divModalBody);
 
+    let precio2 = "$" + String(total);
+    //Actualizamos total a pagar
+    actualizarPrecioTotal(precio2);
 
 
+}
+
+
+function actualizarPrecioTotal(precio) {
+    const divModal = document.querySelector(".divModalBody");
+    const rowTotal = document.querySelector(".rowTotal");
+    const labelTotal = document.querySelector(".labelTotal");
+    const totalPagar = document.querySelector(".totalAPagar");
+
+
+
+    totalPagar.textContent = precio;
+
+    rowTotal.appendChild(labelTotal);
+    rowTotal.appendChild(totalPagar);
+    divModal.appendChild(rowTotal);
 }
 
 function eliminarDelCarrito() {
