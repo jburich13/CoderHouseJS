@@ -1,11 +1,9 @@
 class Curso {
-    constructor(titulo, img, descripcion, precio, id) {
+    constructor(titulo, img, descripcion, precio) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.img = img;
         this.precio = precio;
-        this.id = id;
-
     }
 }
 
@@ -14,9 +12,13 @@ class Curso {
 
 
 let misCursos = [
-    new Curso("Programación", "teacher.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 2000, 1),
-    new Curso("Testing", "teacher.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 4000, 2),
-    new Curso("Diseño UX", "teacher.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 5000, 3)
+    new Curso("Programación", "prg.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 2000),
+    new Curso("Testing", "test.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 4000),
+    new Curso("Diseño UX", "ux.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 5000),
+    new Curso("Machine Learning", "ux.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 3000),
+    new Curso("Test Automation", "ux.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 9000),
+    new Curso("Scrum", "ux.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 1000),
+    new Curso("Inteligencia Artificial", "ux.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 11000)
 ];
 
 
@@ -146,14 +148,33 @@ function agregarAListaCompras(cursoTitle, cursoPrecio, cursoImg) {
     const modalBody = document.querySelector(".modal-body");
     const divModalBody = document.querySelector(".divModalBody")
     const rowModal = document.createElement("div");
-    if (cursoTitle == "Programación") {
-        rowModal.setAttribute("class", "row align-items-center itemsCarrito prog");
-    } else if (cursoTitle == "Testing") {
-        rowModal.setAttribute("class", "row align-items-center itemsCarrito testing");
-    } else if (cursoTitle == "Diseño UX") {
-        rowModal.setAttribute("class", "row align-items-center itemsCarrito ux");
+    rowModal.setAttribute("class", "row align-items-center itemsCarrito")
+    switch (cursoTitle) {
+        case "Programación":
+            console.log("no problem")
+            rowModal.setAttribute("id", "prog");
+            break;
+        case "Testing":
+            rowModal.setAttribute("id", "test");
+            break;
+        case "Diseño UX":
+            rowModal.setAttribute("id", "ux");
+            break;
+        case "Machine Learning":
+            rowModal.setAttribute("id", "ml");
+            break;
+        case "Test Automation":
+            rowModal.setAttribute("id", "ta");
+            break;
+        case "Scrum":
+            rowModal.setAttribute("id", "scrum");
+            break;
+        case "Inteligencia Artificial":
+            rowModal.setAttribute("id", "ia");
+            break;
+        default:
+            console.log("PROBLEMAS");
     }
-
 
 
     //Agregamos el titulo al modal
@@ -225,18 +246,39 @@ function eliminarDelCarrito(event) {
     const tituloCard = cardClicked.querySelector(".card-title").textContent;
 
 
-    if (tituloCard == "Programación") {
-        document.querySelector(".prog").remove();
-        total = total - 2000;
-        document.querySelector(".totalAPagar").textContent = "$" + total;
-    } else if (tituloCard == "Testing") {
-        document.querySelector(".testing").remove();
-        total = total - 4000;
-        document.querySelector(".totalAPagar").textContent = "$" + total;
-    } else if (tituloCard == "Diseño UX") {
-        total = total - 5000;
-        document.querySelector(".ux").remove();
-        document.querySelector(".totalAPagar").textContent = "$" + total;
+
+
+    switch (tituloCard) {
+        case "Programación":
+            const hola = document.querySelector("#prog");
+            console.log("🚀 ~ hola", hola);
+            document.querySelector("#prog").remove();
+            total = total - 2000;
+            document.querySelector(".totalAPagar").textContent = "$" + total;
+        case "Testing":
+            document.querySelector("#test").remove();
+            total = total - 4000;
+            document.querySelector(".totalAPagar").textContent = "$" + total;
+        case "Diseño UX":
+            document.querySelector("#ux").remove();
+            total = total - 4000;
+            document.querySelector(".totalAPagar").textContent = "$" + total;
+        case "Machine Learning":
+            document.querySelector("#ml").remove();
+            total = total - 3000;
+            document.querySelector(".totalAPagar").textContent = "$" + total;
+        case "Test Automation":
+            document.querySelector("#ta").remove();
+            total = total - 9000;
+            document.querySelector(".totalAPagar").textContent = "$" + total;
+        case "Scrum":
+            document.querySelector("#scrum").remove();
+            total = total - 1000;
+            document.querySelector(".totalAPagar").textContent = "$" + total;
+        case "Inteligencia Artificial":
+            document.querySelector("#ia").remove();
+            total = total - 11000;
+            document.querySelector(".totalAPagar").textContent = "$" + total;
     }
 
 
