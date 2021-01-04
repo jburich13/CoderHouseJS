@@ -184,15 +184,18 @@ function agregarAListaCompras(cursoTitle, cursoPrecio, cursoImg) {
 
     modalBody.appendChild(divModalBody);
 
-    let precio2 = "$" + String(total);
+
     //Actualizamos total a pagar
-    actualizarPrecioTotal(precio2);
+    actualizarPrecioTotal(total);
 
 
 }
 
 
 function actualizarPrecioTotal(precio) {
+    const precioCurso = document.querySelector("#precio");
+
+
     const divModal = document.querySelector(".divModalBody");
     const rowTotal = document.querySelector(".rowTotal");
     const labelTotal = document.querySelector(".labelTotal");
@@ -200,7 +203,7 @@ function actualizarPrecioTotal(precio) {
 
 
 
-    totalPagar.textContent = precio;
+    totalPagar.textContent = "$" + precio;
 
     rowTotal.appendChild(labelTotal);
     rowTotal.appendChild(totalPagar);
@@ -211,7 +214,6 @@ function eliminarDelCarrito(event) {
     const num = document.querySelector(".num");
     click -= 1;
     if (click < 0) {
-
         click = 0;
         num.textContent = parseInt(click);
     } else {
@@ -223,13 +225,18 @@ function eliminarDelCarrito(event) {
     const tituloCard = cardClicked.querySelector(".card-title").textContent;
 
 
-
     if (tituloCard == "Programación") {
         document.querySelector(".prog").remove();
+        total = total - 2000;
+        document.querySelector(".totalAPagar").textContent = "$" + total;
     } else if (tituloCard == "Testing") {
         document.querySelector(".testing").remove();
+        total = total - 4000;
+        document.querySelector(".totalAPagar").textContent = "$" + total;
     } else if (tituloCard == "Diseño UX") {
+        total = total - 5000;
         document.querySelector(".ux").remove();
+        document.querySelector(".totalAPagar").textContent = "$" + total;
     }
 
 
