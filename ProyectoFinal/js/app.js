@@ -146,8 +146,13 @@ function agregarAListaCompras(cursoTitle, cursoPrecio, cursoImg) {
     const modalBody = document.querySelector(".modal-body");
     const divModalBody = document.querySelector(".divModalBody")
     const rowModal = document.createElement("div");
-    rowModal.setAttribute("class", "row align-items-center itemsCarrito");
-
+    if (cursoTitle == "Programación") {
+        rowModal.setAttribute("class", "row align-items-center itemsCarrito prog");
+    } else if (cursoTitle == "Testing") {
+        rowModal.setAttribute("class", "row align-items-center itemsCarrito testing");
+    } else if (cursoTitle == "Diseño UX") {
+        rowModal.setAttribute("class", "row align-items-center itemsCarrito ux");
+    }
 
 
 
@@ -202,7 +207,7 @@ function actualizarPrecioTotal(precio) {
     divModal.appendChild(rowTotal);
 }
 
-function eliminarDelCarrito() {
+function eliminarDelCarrito(event) {
     const num = document.querySelector(".num");
     click -= 1;
     if (click < 0) {
@@ -212,6 +217,21 @@ function eliminarDelCarrito() {
     } else {
         num.textContent = parseInt(click);
     }
+
+    const buttonClicked = event.target;
+    const cardClicked = buttonClicked.closest(".card");
+    const tituloCard = cardClicked.querySelector(".card-title").textContent;
+
+
+
+    if (tituloCard == "Programación") {
+        document.querySelector(".prog").remove();
+    } else if (tituloCard == "Testing") {
+        document.querySelector(".testing").remove();
+    } else if (tituloCard == "Diseño UX") {
+        document.querySelector(".ux").remove();
+    }
+
 
 
 }
