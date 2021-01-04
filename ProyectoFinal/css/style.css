@@ -102,13 +102,29 @@ li:hover {
 }
 
 .imgCarrito {
-    width: 4rem;
-    height: 4rem;
-    margin-top: 1rem;
-    margin-left: 80rem;
+    width: 3rem;
+    height: 3rem;
 }
 
 .numCarrito {
     font-size: 2rem;
     color: #000000;
+}
+
+.tituloModal {
+    font-size: 2rem;
+}
+
+.precioModal {
+    font-size: 2rem;
+}
+
+.imgModal {
+    height: 8rem;
+    width: 5rem;
+    border-radius: 10rem;
+}
+
+.itemsCarrito {
+    margin-bottom: 2rem;
 }

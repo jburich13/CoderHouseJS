@@ -89,7 +89,6 @@ let agregarCards = () => {
         botonCard1.id = `boton`;;
         botonCard1.textContent = "Añadir al carrito";
         botonCard1.addEventListener("click", agregarAlCarrito);
-        console.log(botonCard1);
         rowBotones.appendChild(botonCard1);
 
         //Boton 2
@@ -110,17 +109,71 @@ imgCarro.addEventListener("click", function() {})
 
 let click = 0;
 //Funcion para poder agregar al carrito los diferentes cursos.
-function agregarAlCarrito() {
+function agregarAlCarrito(event) {
     //Sumamos al icon del carrito
     const num = document.querySelector(".num");
     click += 1;
     num.textContent = parseInt(click);
+
+
+    //Captamos el boton
+    const boton = event.target;
+
+    //Luego buscamos el elementos mas cercano que tenga como clase 'card', con la funcion closest
+    const card = boton.closest(".card");
+
+
+
+    //Captamos el titulo
+    const cursoTitle = card.querySelector(".card-title").textContent;
+    //Captamos el precio
+    const cursoPrecio = card.querySelector("#precio").textContent;
+    //Captamos la imagen
+    const cursoImg = card.querySelector(".card-img-top").src;
+
+
+    agregarAListaCompras(cursoTitle, cursoPrecio, cursoImg);
+}
+
+function agregarAListaCompras(cursoTitle, cursoPrecio, cursoImg) {
+
+    const modalBody = document.querySelector(".modal-body");
+    const divModalBody = document.createElement("div");
+    const rowModal = document.createElement("div");
+    rowModal.setAttribute("class", "row align-items-center itemsCarrito");
+
+
+
+
+    //Agregamos el titulo al modal
+    const tituloCardModal = document.createElement("p");
+    tituloCardModal.setAttribute("class", "tituloModal col-6");
+    tituloCardModal.textContent = cursoTitle;
+    //Agregamos el precio al modal
+    const precioCardModal = document.createElement("p");
+    precioCardModal.setAttribute("class", "precioModal col-3");
+    precioCardModal.textContent = cursoPrecio;
+    //Agregamos la img
+    const imgCardModal = document.createElement("img");
+    imgCardModal.setAttribute("src", cursoImg);
+    imgCardModal.setAttribute("class", "imgModal col-3")
+
+    rowModal.appendChild(imgCardModal);
+    rowModal.appendChild(tituloCardModal);
+    rowModal.appendChild(precioCardModal);
+
+    divModalBody.appendChild(rowModal);
+    modalBody.appendChild(divModalBody);
+
+
+
 }
 
 function eliminarDelCarrito() {
     const num = document.querySelector(".num");
     click -= 1;
     if (click < 0) {
+
         click = 0;
         num.textContent = parseInt(click);
     } else {
