@@ -21,6 +21,15 @@ let misCursos = [
     new Curso("Inteligencia Artificial", "ux.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 11000)
 ];
 
+let json;
+misCursos.forEach(elem => {
+    json = JSON.stringify(elem);
+    localStorage.setItem(elem.titulo, json);
+})
+
+
+
+
 
 
 
@@ -134,6 +143,8 @@ function agregarAlCarrito(event) {
     const cursoImg = card.querySelector(".card-img-top").src;
 
 
+
+
     agregarAListaCompras(cursoTitle, cursoPrecio, cursoImg);
 }
 
@@ -187,7 +198,6 @@ function agregarAListaCompras(cursoTitle, cursoPrecio, cursoImg) {
     precioCardModal.textContent = cursoPrecio;
     let precio = cursoPrecio.substring(1);
     total += Number(precio);
-
     //Agregamos la img
     const imgCardModal = document.createElement("img");
     imgCardModal.setAttribute("src", cursoImg);
@@ -251,7 +261,6 @@ function eliminarDelCarrito(event) {
     switch (tituloCard) {
         case "Programación":
             const hola = document.querySelector("#prog");
-            console.log("🚀 ~ hola", hola);
             document.querySelector("#prog").remove();
             total = total - 2000;
             document.querySelector(".totalAPagar").textContent = "$" + total;
@@ -261,7 +270,7 @@ function eliminarDelCarrito(event) {
             document.querySelector(".totalAPagar").textContent = "$" + total;
         case "Diseño UX":
             document.querySelector("#ux").remove();
-            total = total - 4000;
+            total = total - 5000;
             document.querySelector(".totalAPagar").textContent = "$" + total;
         case "Machine Learning":
             document.querySelector("#ml").remove();

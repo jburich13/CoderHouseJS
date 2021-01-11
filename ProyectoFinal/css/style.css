@@ -4,6 +4,7 @@ html {
 
 body {
     background-color: #1A404F !important;
+    width: 100%;
 }
 
 
@@ -30,6 +31,7 @@ body {
 }
 
 #misCursos {
+    width: 100%;
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -38,7 +40,7 @@ body {
 #nav {
     font-size: 2rem;
     background-color: #9FC5E1;
-    width: 100%;
+    margin: 0;
     font-family: 'Arvo', serif;
 }
 
