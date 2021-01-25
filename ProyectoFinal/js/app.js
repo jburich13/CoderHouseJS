@@ -87,21 +87,21 @@ let agregarCards = () => {
         rowBotones.setAttribute("class", "row justify-content-between");
         divBody.appendChild(rowBotones);
 
+
+
+
         //Agrego los botones
-        //Boton 1
-
-
         //Boton 2
         const botonCard2 = document.createElement("a");
-        botonCard2.className = `btn col-5 curso${card.id}`;
+        botonCard2.className = `btn col-5 curso${card.id} rounded-pill`;
         botonCard2.id = `boton`;
         botonCard2.addEventListener("click", eliminarDelCarrito);
         botonCard2.textContent = "Eliminar del carrito";
         rowBotones.appendChild(botonCard2);
 
-
+        //Boton 1
         const botonCard1 = document.createElement("a");
-        botonCard1.className = `btn col-5 añadir`;
+        botonCard1.className = `btn col-5 añadir rounded-pill`;
         botonCard1.id = `boton`;
         botonCard1.textContent = "Añadir al carrito";
         botonCard1.addEventListener("click", agregarAlCarrito);
@@ -334,6 +334,10 @@ function restarCarrito() {
     }
 
 }
+
+$(".titulo-seccion").click(() => {
+    $("#misCursos").slideToggle();
+})
 
 
 
