@@ -343,16 +343,3 @@ function restarCarrito() {
 $(".titulo-seccion").click(() => {
     $("#misCursos").slideToggle();
 })
-
-
-
-
-
-
-
-
-
-
-
-
-// agregarCards();
