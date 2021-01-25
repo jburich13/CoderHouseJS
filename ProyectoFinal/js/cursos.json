@@ -1,0 +1,44 @@
+[{
+        "nombre": "Programacion",
+        "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?",
+        "img": "prg.jpg",
+        "precio": 2000
+    },
+    {
+        "nombre": "Testing",
+        "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?",
+        "img": "prg.jpg",
+        "precio": 4000
+    },
+    {
+        "nombre": "Diseño UX",
+        "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?",
+        "img": "prg.jpg",
+        "precio": 5000
+    },
+    {
+        "nombre": "Machine Learning",
+        "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?",
+        "img": "prg.jpg",
+        "precio": 3000
+    },
+    {
+        "nombre": "Test Automation",
+        "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?",
+        "img": "prg.jpg",
+        "precio": 9000
+    },
+    {
+        "nombre": "Scrum",
+        "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?",
+        "img": "prg.jpg",
+        "precio": 1000
+    },
+    {
+        "nombre": "Inteligencia Artificial",
+        "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?",
+        "img": "prg.jpg",
+        "precio": 11000
+    }
+
+]

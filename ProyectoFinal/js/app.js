@@ -8,31 +8,36 @@ class Curso {
 }
 
 
-
-
-
-let misCursos = [
-    new Curso("Programación", "prg.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 2000),
-    new Curso("Testing", "test.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 4000),
-    new Curso("Diseño UX", "ux.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 5000),
-    new Curso("Machine Learning", "ux.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 3000),
-    new Curso("Test Automation", "ux.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 9000),
-    new Curso("Scrum", "ux.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 1000),
-    new Curso("Inteligencia Artificial", "ux.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugiat voluptatem odit doloremque porro similique?", 11000)
-];
-
-
-
+let cursos = {}
+document.addEventListener('DOMContentLoaded', () => {
+    $.ajax({
+        url: 'js/cursos.json',
+        success: function(data, status, xhr) {
+            agregarCards(data);
+        },
+        error: function(xhr, status, errorThrown) {
+            console.log(xhr)
+            console.log(status)
+            console.log(errorThrown)
+        }
+    });
 
 
 
 
+})
+console.log(cursos)
 
-let agregarCards = () => {
+
+
+
+
+
+let agregarCards = (data) => {
 
     //Traigo el container
     const container = document.getElementById("misCursos");
-    misCursos.forEach(card => {
+    data.forEach(card => {
 
         //Creo el div de la tarjeta
         const divCard = document.createElement("div");
@@ -56,7 +61,7 @@ let agregarCards = () => {
         //Agrego el titulo
         const tituloCard = document.createElement("h5");
         tituloCard.setAttribute("class", "card-title");
-        tituloCard.textContent = `${card.titulo}`;
+        tituloCard.textContent = `${card.nombre}`;
         divBody.appendChild(tituloCard);
 
 
@@ -350,4 +355,4 @@ $(".titulo-seccion").click(() => {
 
 
 
-agregarCards();
+// agregarCards();
