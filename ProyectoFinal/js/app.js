@@ -8,25 +8,51 @@ class Curso {
 }
 
 
-let cursos = {}
+
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     $.ajax({
+//         url: 'js/cursos.json',
+//         success: function(data, status, xhr) {
+//             agregarCards(data);
+//         },
+//         error: function(xhr, status, errorThrown) {
+//             console.log(xhr)
+//             console.log(status)
+//             console.log(errorThrown)
+//         }
+//   });
+
+
+
+
+// })
+
+let page = 1;
 document.addEventListener('DOMContentLoaded', () => {
     $.ajax({
-        url: 'js/cursos.json',
+        url: 'https://api.rawg.io/api/games?page_size=3&page=' + page,
+        beforeSend: function() {
+            $('#loader').show();
+        },
         success: function(data, status, xhr) {
-            agregarCards(data);
+            agregarCards(data.results)
+
+        },
+        complete: function() {
+            $("#loader").hide();
         },
         error: function(xhr, status, errorThrown) {
             console.log(xhr)
             console.log(status)
             console.log(errorThrown)
         }
+
     });
 
-
-
-
 })
-console.log(cursos)
+
 
 
 
@@ -37,7 +63,7 @@ let agregarCards = (data) => {
 
     //Traigo el container
     const container = document.getElementById("misCursos");
-    data.forEach(card => {
+    data.forEach(game => {
 
         //Creo el div de la tarjeta
         const divCard = document.createElement("div");
@@ -47,8 +73,8 @@ let agregarCards = (data) => {
 
         //Agrego la imagen
         const imgCard = document.createElement("img");
-        imgCard.setAttribute("class", "card-img-top")
-        imgCard.src = `src\\${card.img}`;
+        imgCard.setAttribute("class", "card-img-top img-card")
+        imgCard.src = `${game.background_image}`;
         divCard.appendChild(imgCard);
 
 
@@ -61,7 +87,7 @@ let agregarCards = (data) => {
         //Agrego el titulo
         const tituloCard = document.createElement("h5");
         tituloCard.setAttribute("class", "card-title");
-        tituloCard.textContent = `${card.nombre}`;
+        tituloCard.textContent = `${game.name}`;
         divBody.appendChild(tituloCard);
 
 
@@ -69,27 +95,18 @@ let agregarCards = (data) => {
         const descripcionCard = document.createElement("p");
         descripcionCard.setAttribute("class", "card-title");
         descripcionCard.setAttribute("id", "text");
-        descripcionCard.textContent = `${card.descripcion}`;
+        descripcionCard.textContent = "Lanzamiento: " + `${game.released}`;
         divBody.appendChild(descripcionCard);
 
 
-
-        //Label de precio
-        const labelPrecio = document.createElement("h5");
-        labelPrecio.textContent = "Precio:";
-        divBody.appendChild(labelPrecio);
         //Agrego el precio
-        const precioCard = document.createElement("p");
-        precioCard.setAttribute("class", "text-center");
-        precioCard.setAttribute("id", "precio");
-        precioCard.textContent = `$${card.precio}`;
-        divBody.appendChild(precioCard);
+
 
 
 
         //Agrego la linea de los botones
         const rowBotones = document.createElement("div");
-        rowBotones.setAttribute("class", "row justify-content-between");
+        rowBotones.setAttribute("class", "row justify-content-center");
         divBody.appendChild(rowBotones);
 
 
@@ -97,22 +114,113 @@ let agregarCards = (data) => {
 
         //Agrego los botones
         //Boton 2
-        const botonCard2 = document.createElement("a");
-        botonCard2.className = `btn col-5 curso${card.id} rounded-pill`;
-        botonCard2.id = `boton`;
-        botonCard2.addEventListener("click", eliminarDelCarrito);
-        botonCard2.textContent = "Eliminar del carrito";
-        rowBotones.appendChild(botonCard2);
+        const botonCard = document.createElement("a");
+        botonCard.className = `boton col-10 rounded-pill p-2`;
+        botonCard.id = `${game.id}`;
+        botonCard.textContent = "Mas información";
+        botonCard.addEventListener("click", (e) => {
+            e.preventDefault();
+            $("#misCursos").fadeOut()
+            $("#verMas").fadeOut()
+            $.ajax({
+                url: "https://api.rawg.io/api/games/" + botonCard.id,
+                beforeSend: function() {
+                    $('#loader').show();
+                },
+                success: function(data, status, xhr) {
+                    console.log("🚀 ~ data", data);
+                    descripcionJuegos(data);
+                },
+                complete: function() {
+                    $("#loader").hide();
+                },
+                error: function(xhr, status, errorThrown) {
+                    console.log(xhr)
+                    console.log(status)
+                    console.log(errorThrown)
+                }
 
-        //Boton 1
-        const botonCard1 = document.createElement("a");
-        botonCard1.className = `btn col-5 añadir rounded-pill`;
-        botonCard1.id = `boton`;
-        botonCard1.textContent = "Añadir al carrito";
-        botonCard1.addEventListener("click", agregarAlCarrito);
-        rowBotones.appendChild(botonCard1);
+            });
+
+        });
+        rowBotones.appendChild(botonCard);
     });
 }
+
+function descripcionJuegos(data) {
+    const contBtn = document.createElement("div");
+    contBtn.setAttribute("id", "volver");
+    const btnVolver = document.createElement("a");
+    btnVolver.setAttribute("class", "boton rounded-pill p-4 m-3");
+    btnVolver.textContent = "volver"
+    const container = document.querySelector("#descripcion-juegos");
+    contBtn.appendChild(btnVolver)
+    container.appendChild(contBtn);
+    btnVolver.addEventListener("click", (e) => {
+        e.preventDefault();
+        $(".main").remove();
+        $(btnVolver).remove();
+        $("#misCursos").show();
+        $("#verMas").show();
+    })
+
+
+    cargarImgPortada(data);
+
+}
+
+
+function cargarImgPortada(data) {
+    const container = document.querySelector("#descripcion-juegos");
+    const main = document.createElement("div");
+    const imgPortada = document.createElement("img")
+    main.setAttribute("class", "row justify-content-center m-5 main")
+    imgPortada.setAttribute("class", "img-portada row justify-content-center")
+    imgPortada.setAttribute("src", `${data.background_image}`);
+    main.appendChild(imgPortada);
+    container.appendChild(main);
+    $(".main").fadeIn("slow");
+    $("#descripcion-juegos").show();
+
+}
+
+
+
+
+
+const verMas = document.querySelector(".verMas");
+console.log("🚀 ~ verMas", verMas);
+verMas.addEventListener("click", (e) => {
+    e.preventDefault();
+    page += 1;
+    $.ajax({
+        url: 'https://api.rawg.io/api/games?page_size=3&page=' + page,
+        beforeSend: function() {
+            $('#loader').show();
+        },
+        success: function(data, status, xhr) {
+            agregarCards(data.results)
+
+        },
+        complete: function() {
+            $("#loader").hide();
+            verMas.scrollIntoView()
+        },
+        error: function(xhr, status, errorThrown) {
+            console.log(xhr)
+            console.log(status)
+            console.log(errorThrown)
+        }
+
+    });
+
+
+})
+
+
+
+
+
 
 //Listener para el carrito, la idea es que se muestre un modal con los cursos agregados,
 //pero todavia falta el desarrollo.
