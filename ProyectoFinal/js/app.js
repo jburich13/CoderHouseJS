@@ -1,39 +1,10 @@
-class Curso {
-    constructor(titulo, img, descripcion, precio) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.img = img;
-        this.precio = precio;
-    }
-}
-
-
-
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     $.ajax({
-//         url: 'js/cursos.json',
-//         success: function(data, status, xhr) {
-//             agregarCards(data);
-//         },
-//         error: function(xhr, status, errorThrown) {
-//             console.log(xhr)
-//             console.log(status)
-//             console.log(errorThrown)
-//         }
-//   });
-
-
-
-
-// })
-
 let page = 1;
+
 document.addEventListener('DOMContentLoaded', () => {
     $.ajax({
-        url: 'https://api.rawg.io/api/games?page_size=3&page=' + page,
+        url: 'https://api.rawg.io/api/games?page_size=21&page=' + page,
         beforeSend: function() {
+            $(".verMas").toggle()
             $('#loader').show();
         },
         success: function(data, status, xhr) {
@@ -41,7 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         },
         complete: function() {
+            $(".verMas").toggle();
             $("#loader").hide();
+
         },
         error: function(xhr, status, errorThrown) {
             console.log(xhr)
@@ -56,12 +29,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+function filtrarJuegos(data) {
+
+}
+
+const form = document.querySelector("#form");
+const inputBuscador = document.querySelector("#buscador");
+
+
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+
+    console.log(inputBuscador.value)
+    $.ajax({
+        url: 'https://api.rawg.io/api/games?search_exact=true&search=' + inputBuscador.value + "&page_size=21",
+        beforeSend: function() {
+            $(".verMas").hide();
+            $(".card").remove();
+            $('#loader').show();
+        },
+        success: function(data, status, xhr) {
+            agregarCards(data.results);
+        },
+        complete: function() {
+            $("#loader").hide();
+        },
+        error: function(xhr, status, errorThrown) {
+            console.log(xhr)
+            console.log(status)
+            console.log(errorThrown)
+        }
+    });
+})
+
+
 
 
 
 let agregarCards = (data) => {
-
-    //Traigo el container
+    console.log(data)
+        //Traigo el container
     const container = document.getElementById("misCursos");
     data.forEach(game => {
 
@@ -99,7 +108,6 @@ let agregarCards = (data) => {
         divBody.appendChild(descripcionCard);
 
 
-        //Agrego el precio
 
 
 
@@ -116,6 +124,7 @@ let agregarCards = (data) => {
         //Boton 2
         const botonCard = document.createElement("a");
         botonCard.className = `boton col-10 rounded-pill p-2`;
+        botonCard.href = "#";
         botonCard.id = `${game.id}`;
         botonCard.textContent = "Mas información";
         botonCard.addEventListener("click", (e) => {
@@ -128,7 +137,11 @@ let agregarCards = (data) => {
                     $('#loader').show();
                 },
                 success: function(data, status, xhr) {
-                    infoAmpliada(data);
+                    infoAmpliada();
+                    cargarImgPortada(data);
+                    cargarDescripcion(data);
+                    cargarPlataformas(data);
+                    loadBtn();
                 },
                 complete: function() {
                     $("#loader").hide();
@@ -146,15 +159,23 @@ let agregarCards = (data) => {
     });
 }
 
-function infoAmpliada(data) {
+function infoAmpliada() {
     const container = document.querySelector("#descripcion-juegos");
     const elementos = document.createElement("div");
     elementos.setAttribute("id", "elementos");
+    container.appendChild(elementos);
+
+}
+
+function loadBtn() {
+    const container = document.querySelector("#descripcion-juegos");
+    const elementos = document.querySelector("#elementos")
     const contBtn = document.createElement("div");
     contBtn.setAttribute("id", "volver");
     const btnVolver = document.createElement("a");
-    btnVolver.setAttribute("class", "boton rounded-pill p-4 m-3");
-    btnVolver.textContent = "volver"
+    btnVolver.setAttribute("class", "boton rounded-pill p-4 mb-5");
+    btnVolver.textContent = "Volver"
+    btnVolver.href = "#"
     contBtn.appendChild(btnVolver);
     elementos.appendChild(contBtn);
     container.appendChild(elementos);
@@ -165,11 +186,6 @@ function infoAmpliada(data) {
         $("#misCursos").show();
         $("#verMas").show();
     })
-
-
-    cargarImgPortada(data);
-    cargarDescripcion(data);
-    cargarPlataformas(data);
 }
 
 
@@ -177,33 +193,34 @@ function infoAmpliada(data) {
 
 function cargarImgPortada(data) {
 
-
+    const elementos = document.querySelector("#elementos")
     const main = document.createElement("div");
     const imgPortada = document.createElement("img");
     main.setAttribute("class", "row justify-content-center m-5 main")
     imgPortada.setAttribute("class", "img-portada row justify-content-center")
     imgPortada.setAttribute("src", `${data.background_image}`);
+
     main.appendChild(imgPortada);
+    console.log(elementos);
     elementos.appendChild(main);
     $("#descripcion-juegos").show();
 }
 
 function cargarDescripcion(data) {
+    const elementos = document.querySelector("#elementos")
     const containerDescripcion = document.createElement("div");
     containerDescripcion.setAttribute("id", "container-descripcion");
-    containerDescripcion.setAttribute("class", "col-12  row justify-content-center");
+    containerDescripcion.setAttribute("class", "col-12  row justify-content-start");
     const titulo = document.createElement("a");
+    const descripcion = document.createElement("p");
     titulo.href = "#";
     titulo.addEventListener("click", (e) => {
         e.preventDefault()
         $("#descripcion").slideToggle("fast");
-        scrollTo()
-
     })
     titulo.textContent = "Descripción";
     titulo.setAttribute("id", "titulo-descripcion")
-    titulo.setAttribute("class", "")
-    const descripcion = document.createElement("p");
+    titulo.setAttribute("class", "col-12 text-left")
     descripcion.setAttribute("id", "descripcion");
     descripcion.innerHTML = `${data.description}`
 
@@ -214,10 +231,12 @@ function cargarDescripcion(data) {
 }
 
 function cargarPlataformas(data) {
+    const elementos = document.querySelector("#elementos")
     const containerPlataformas = document.createElement("div");
     containerPlataformas.setAttribute("id", "container-plataforma");
-    containerPlataformas.setAttribute("class", "col-12  row justify-content-center");
+    containerPlataformas.setAttribute("class", "col-12  row justify-content-start");
     const titulo = document.createElement("a");
+    const plataformas = document.createElement("p");
     titulo.href = "#";
     titulo.addEventListener("click", (e) => {
         e.preventDefault()
@@ -225,8 +244,8 @@ function cargarPlataformas(data) {
     })
     titulo.textContent = "Plataformas";
     titulo.setAttribute("id", "titulo-plataforma")
-    titulo.setAttribute("class", "col-12 text-center")
-    const plataformas = document.createElement("p");
+    titulo.setAttribute("class", "col-12 text-left")
+
     plataformas.setAttribute("id", "plataformas");
     let plataformasAPI = data.platforms;
     const listaPlataformas = document.createElement("ul");
@@ -249,13 +268,17 @@ function cargarPlataformas(data) {
 
 
 
+
+
+
 const verMas = document.querySelector(".verMas");
 verMas.addEventListener("click", (e) => {
     e.preventDefault();
     page += 1;
     $.ajax({
-        url: 'https://api.rawg.io/api/games?page_size=3&page=' + page,
+        url: 'https://api.rawg.io/api/games?page_size=21&page=' + page,
         beforeSend: function() {
+            $('.verMas').hide();
             $('#loader').show();
         },
         success: function(data, status, xhr) {
@@ -264,6 +287,7 @@ verMas.addEventListener("click", (e) => {
         },
         complete: function() {
             $("#loader").hide();
+            $('.verMas').show();
             verMas.scrollIntoView()
         },
         error: function(xhr, status, errorThrown) {
@@ -273,8 +297,4 @@ verMas.addEventListener("click", (e) => {
         }
 
     });
-
-
-
-
 })

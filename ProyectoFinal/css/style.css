@@ -148,7 +148,8 @@ li {
 }
 
 .img-portada {
-    height: 30rem;
+    height: 70rem;
+    width: 150rem;
     object-fit: cover;
 }
 
@@ -161,11 +162,15 @@ li {
     margin: 1rem;
 }
 
+#container-plataforma {
+    justify-content: left;
+}
+
 #descripcion {
     font-size: 2rem;
     color: white;
     padding: 2rem;
-    text-align: justify;
+    text-align: left;
 }
 
 #titulo-descripcion {
@@ -179,7 +184,7 @@ li {
     font-size: 2rem;
     color: white;
     padding: 2rem;
-    text-align: justify;
+    text-align: left;
 }
 
 #titulo-plataforma {
@@ -197,10 +202,6 @@ ul {
 li {
     font-size: 3rem;
     border: none;
-}
-
-li :hover {
-    border: none !important;
 }
 
 #volver {
