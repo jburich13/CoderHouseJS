@@ -53,6 +53,10 @@ li:hover a {
     color: #000000;
 }
 
+:focus {
+    outline: none;
+}
+
 li {
     margin: 0.5rem;
     padding: 0.5rem;

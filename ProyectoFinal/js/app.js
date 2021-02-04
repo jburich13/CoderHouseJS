@@ -108,6 +108,10 @@ let agregarCards = (data) => {
         divBody.appendChild(descripcionCard);
 
 
+        const labelTiendas = document.createElement("h3")
+        labelTiendas.textContent = "Tiendas:";
+
+        divBody.appendChild(labelTiendas);
 
 
 
@@ -119,9 +123,7 @@ let agregarCards = (data) => {
 
 
 
-
         //Agrego los botones
-        //Boton 2
         const botonCard = document.createElement("a");
         botonCard.className = `boton col-10 rounded-pill p-2`;
         botonCard.href = "#";
@@ -155,6 +157,8 @@ let agregarCards = (data) => {
             });
 
         });
+
+
         rowBotones.appendChild(botonCard);
     });
 }
