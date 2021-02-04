@@ -1,5 +1,6 @@
 html {
     font-size: 62.5%;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -57,11 +58,6 @@ li {
     padding: 0.5rem;
     border-radius: 5px;
     border: 1px solid;
-}
-
-li:hover {
-    background-color: #8aacc0;
-    border: 1px solid black;
 }
 
 #card {
@@ -163,6 +159,48 @@ li:hover {
     text-decoration: none !important;
     padding: 1rem;
     margin: 1rem;
+}
+
+#descripcion {
+    font-size: 2rem;
+    color: white;
+    padding: 2rem;
+    text-align: justify;
+}
+
+#titulo-descripcion {
+    font-size: 5rem;
+    color: white;
+    padding: 2rem;
+    text-align: justify;
+}
+
+#plataformas {
+    font-size: 2rem;
+    color: white;
+    padding: 2rem;
+    text-align: justify;
+}
+
+#titulo-plataforma {
+    font-size: 5rem;
+    color: white;
+    padding: 2rem;
+    text-align: justify;
+}
+
+ul {
+    justify-content: left;
+    color: white;
+}
+
+li {
+    font-size: 3rem;
+    border: none;
+}
+
+li :hover {
+    border: none !important;
 }
 
 #volver {

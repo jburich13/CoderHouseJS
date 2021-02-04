@@ -128,8 +128,7 @@ let agregarCards = (data) => {
                     $('#loader').show();
                 },
                 success: function(data, status, xhr) {
-                    console.log("🚀 ~ data", data);
-                    descripcionJuegos(data);
+                    infoAmpliada(data);
                 },
                 complete: function() {
                     $("#loader").hide();
@@ -147,41 +146,103 @@ let agregarCards = (data) => {
     });
 }
 
-function descripcionJuegos(data) {
+function infoAmpliada(data) {
+    const container = document.querySelector("#descripcion-juegos");
+    const elementos = document.createElement("div");
+    elementos.setAttribute("id", "elementos");
     const contBtn = document.createElement("div");
     contBtn.setAttribute("id", "volver");
     const btnVolver = document.createElement("a");
     btnVolver.setAttribute("class", "boton rounded-pill p-4 m-3");
     btnVolver.textContent = "volver"
-    const container = document.querySelector("#descripcion-juegos");
-    contBtn.appendChild(btnVolver)
-    container.appendChild(contBtn);
+    contBtn.appendChild(btnVolver);
+    elementos.appendChild(contBtn);
+    container.appendChild(elementos);
     btnVolver.addEventListener("click", (e) => {
         e.preventDefault();
         $(".main").remove();
-        $(btnVolver).remove();
+        $(elementos).remove();
         $("#misCursos").show();
         $("#verMas").show();
     })
 
 
     cargarImgPortada(data);
-
+    cargarDescripcion(data);
+    cargarPlataformas(data);
 }
 
 
+
+
 function cargarImgPortada(data) {
-    const container = document.querySelector("#descripcion-juegos");
+
+
     const main = document.createElement("div");
-    const imgPortada = document.createElement("img")
+    const imgPortada = document.createElement("img");
     main.setAttribute("class", "row justify-content-center m-5 main")
     imgPortada.setAttribute("class", "img-portada row justify-content-center")
     imgPortada.setAttribute("src", `${data.background_image}`);
     main.appendChild(imgPortada);
-    container.appendChild(main);
-    $(".main").fadeIn("slow");
+    elementos.appendChild(main);
     $("#descripcion-juegos").show();
+}
 
+function cargarDescripcion(data) {
+    const containerDescripcion = document.createElement("div");
+    containerDescripcion.setAttribute("id", "container-descripcion");
+    containerDescripcion.setAttribute("class", "col-12  row justify-content-center");
+    const titulo = document.createElement("a");
+    titulo.href = "#";
+    titulo.addEventListener("click", (e) => {
+        e.preventDefault()
+        $("#descripcion").slideToggle("fast");
+        scrollTo()
+
+    })
+    titulo.textContent = "Descripción";
+    titulo.setAttribute("id", "titulo-descripcion")
+    titulo.setAttribute("class", "")
+    const descripcion = document.createElement("p");
+    descripcion.setAttribute("id", "descripcion");
+    descripcion.innerHTML = `${data.description}`
+
+    containerDescripcion.appendChild(titulo);
+    containerDescripcion.appendChild(descripcion);
+    elementos.appendChild(containerDescripcion);
+    $("#descripcion").hide();
+}
+
+function cargarPlataformas(data) {
+    const containerPlataformas = document.createElement("div");
+    containerPlataformas.setAttribute("id", "container-plataforma");
+    containerPlataformas.setAttribute("class", "col-12  row justify-content-center");
+    const titulo = document.createElement("a");
+    titulo.href = "#";
+    titulo.addEventListener("click", (e) => {
+        e.preventDefault()
+        $(listaPlataformas).slideToggle("fast");
+    })
+    titulo.textContent = "Plataformas";
+    titulo.setAttribute("id", "titulo-plataforma")
+    titulo.setAttribute("class", "col-12 text-center")
+    const plataformas = document.createElement("p");
+    plataformas.setAttribute("id", "plataformas");
+    let plataformasAPI = data.platforms;
+    const listaPlataformas = document.createElement("ul");
+    plataformasAPI.forEach(element => {
+        const plataformas = document.createElement("li");
+        plataformas.setAttribute("class", "col-12");
+        plataformas.textContent = `${element.platform.name}`;
+        listaPlataformas.appendChild(plataformas);
+    });
+
+
+    containerPlataformas.appendChild(titulo);
+    containerPlataformas.appendChild(plataformas);
+    containerPlataformas.appendChild(listaPlataformas);
+    elementos.appendChild(containerPlataformas);
+    $(listaPlataformas).hide();
 }
 
 
@@ -189,7 +250,6 @@ function cargarImgPortada(data) {
 
 
 const verMas = document.querySelector(".verMas");
-console.log("🚀 ~ verMas", verMas);
 verMas.addEventListener("click", (e) => {
     e.preventDefault();
     page += 1;
@@ -215,239 +275,6 @@ verMas.addEventListener("click", (e) => {
     });
 
 
-})
 
 
-
-
-
-
-//Listener para el carrito, la idea es que se muestre un modal con los cursos agregados,
-//pero todavia falta el desarrollo.
-const imgCarro = document.querySelector(".imgCarrito");
-imgCarro.addEventListener("click", function() {})
-
-
-let click = 0;
-let boton;
-//Funcion para poder agregar al carrito los diferentes cursos.
-function agregarAlCarrito(event) {
-    //Sumamos al icon del carrito
-    const num = document.querySelector(".num");
-    click += 1;
-    num.textContent = parseInt(click);
-
-
-    //Captamos el boton
-    boton = event.target;
-    //Luego buscamos el elementos mas cercano que tenga como clase 'card', con la funcion closest
-    const card = boton.closest(".card");
-
-
-    $(boton).addClass("disabled");
-
-
-
-
-    //Captamos el titulo
-    const cursoTitle = card.querySelector(".card-title").textContent;
-    //Captamos el precio
-    const cursoPrecio = card.querySelector("#precio").textContent;
-    //Captamos la imagen
-    const cursoImg = card.querySelector(".card-img-top").src;
-
-
-
-
-
-
-    agregarAListaCompras(cursoTitle, cursoPrecio, cursoImg);
-}
-
-
-
-
-
-let total = 0;
-
-function agregarAListaCompras(cursoTitle, cursoPrecio, cursoImg) {
-
-    const modalBody = document.querySelector(".modal-body");
-    const divModalBody = document.querySelector(".divModalBody")
-    const rowModal = document.createElement("div");
-    rowModal.setAttribute("class", "row align-items-center itemsCarrito")
-    switch (cursoTitle) {
-        case "Programación":
-            console.log("no problem")
-            rowModal.setAttribute("id", "prog");
-            break;
-        case "Testing":
-            rowModal.setAttribute("id", "test");
-            break;
-        case "Diseño UX":
-            rowModal.setAttribute("id", "ux");
-            break;
-        case "Machine Learning":
-            rowModal.setAttribute("id", "ml");
-            break;
-        case "Test Automation":
-            rowModal.setAttribute("id", "ta");
-            break;
-        case "Scrum":
-            rowModal.setAttribute("id", "scrum");
-            break;
-        case "Inteligencia Artificial":
-            rowModal.setAttribute("id", "ia");
-            break;
-        default:
-            console.log("PROBLEMAS");
-    }
-
-
-    //Agregamos el titulo al modal
-    const tituloCardModal = document.createElement("p");
-    tituloCardModal.setAttribute("class", "tituloModal col-5");
-    tituloCardModal.textContent = cursoTitle;
-    //Agregamos el precio al modal
-    const precioCardModal = document.createElement("p");
-    precioCardModal.setAttribute("class", "precioModal col-2");
-    precioCardModal.textContent = cursoPrecio;
-    let precio = cursoPrecio.substring(1);
-    total += Number(precio);
-    //Agregamos la img
-    const imgCardModal = document.createElement("img");
-    imgCardModal.setAttribute("src", cursoImg);
-    imgCardModal.setAttribute("class", "imgModal col-3")
-    rowModal.appendChild(imgCardModal);
-    rowModal.appendChild(tituloCardModal);
-    rowModal.appendChild(precioCardModal);
-
-    divModalBody.appendChild(rowModal);
-
-    modalBody.appendChild(divModalBody);
-
-
-    //Actualizamos total a pagar
-    actualizarPrecioTotal(total);
-
-
-}
-
-
-function actualizarPrecioTotal(precio) {
-    const precioCurso = document.querySelector("#precio");
-
-
-    const divModal = document.querySelector(".divModalBody");
-    const rowTotal = document.querySelector(".rowTotal");
-    const labelTotal = document.querySelector(".labelTotal");
-    const totalPagar = document.querySelector(".totalAPagar");
-
-
-
-    totalPagar.textContent = "$" + precio;
-
-    rowTotal.appendChild(labelTotal);
-    rowTotal.appendChild(totalPagar);
-    divModal.appendChild(rowTotal);
-}
-
-function eliminarDelCarrito(event) {
-    const buttonClicked = event.target;
-    const cardClicked = buttonClicked.closest(".card");
-    const tituloCard = cardClicked.querySelector(".card-title").textContent;
-    console.log($(buttonClicked).next().removeClass("disabled"));
-
-
-
-    switch (tituloCard) {
-        case "Programación":
-
-
-            if (document.querySelector("#prog") != null) {
-                $("#prog").remove();
-                total = total - 2000;
-                document.querySelector(".totalAPagar").textContent = "$" + total;
-                $("#prog").show();
-
-                restarCarrito();
-            }
-            break;
-        case "Testing":
-            if (document.querySelector("#test") != null) {
-                $("#test").remove();
-                total = total - 4000;
-                document.querySelector(".totalAPagar").textContent = "$" + total;
-                restarCarrito();
-            }
-            break;
-        case "Diseño UX":
-            if (document.querySelector("#ux") != null) {
-                $("#ux").remove();
-                total = total - 5000;
-                document.querySelector(".totalAPagar").textContent = "$" + total;
-                $(boton).show();
-                restarCarrito();
-            }
-            break;
-        case "Machine Learning":
-            if (document.querySelector("#ml") != null) {
-                $("#ml").remove();
-                total = total - 3000;
-                document.querySelector(".totalAPagar").textContent = "$" + total;
-                $(boton).show();
-                restarCarrito();
-            }
-            break;
-        case "Test Automation":
-            if (document.querySelector("#ta") != null) {
-                $("#ta").remove();
-                total = total - 9000;
-                document.querySelector(".totalAPagar").textContent = "$" + total;
-                $(boton).show();
-                restarCarrito();
-            }
-            break;
-        case "Scrum":
-            if (document.querySelector("#scrum") != null) {
-                $("#scrum").remove();
-                total = total - 1000;
-                document.querySelector(".totalAPagar").textContent = "$" + total;
-                $(boton).show();
-                restarCarrito();
-            }
-            break;
-        case "Inteligencia Artificial":
-            if (document.querySelector("#ia") != null) {
-                $("#ia").remove();
-                total = total - 11000;
-                document.querySelector(".totalAPagar").textContent = "$" + total;
-                $(boton).show();
-                restarCarrito();
-            }
-            break;
-        default:
-            console.log("Nada para eliminar")
-    }
-
-
-
-}
-
-
-
-function restarCarrito() {
-    const num = document.querySelector(".num");
-    click -= 1;
-    if (click < 0) {
-        click = 0;
-        num.textContent = parseInt(click);
-    } else {
-        num.textContent = parseInt(click);
-    }
-
-}
-
-$(".titulo-seccion").click(() => {
-    $("#misCursos").slideToggle();
 })
