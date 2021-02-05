@@ -1,5 +1,3 @@
-let page = 1;
-
 document.addEventListener('DOMContentLoaded', () => {
     $.ajax({
         url: 'https://api.rawg.io/api/games?page_size=21&page=' + page,
@@ -26,13 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
-
-
-
-function filtrarJuegos(data) {
-
-}
-
+let page = 1;
 const form = document.querySelector("#form");
 const inputBuscador = document.querySelector("#buscador");
 
@@ -40,18 +32,20 @@ const inputBuscador = document.querySelector("#buscador");
 
 form.addEventListener("submit", function(e) {
     e.preventDefault();
+    console.log(inputBuscador.value);
 
-
-    console.log(inputBuscador.value)
     $.ajax({
-        url: 'https://api.rawg.io/api/games?search_exact=true&search=' + inputBuscador.value + "&page_size=21",
+        url: 'https://api.rawg.io/api/games?search_exact=true&search=' + inputBuscador.value + "&page_size=21" + "&page=" + page,
         beforeSend: function() {
-            $(".verMas").hide();
-            $(".card").remove();
+            $("#elementos").remove();
+            $(".card").hide();
             $('#loader').show();
         },
         success: function(data, status, xhr) {
             agregarCards(data.results);
+            page += 1;
+            $("#misCursos").show();
+
         },
         complete: function() {
             $("#loader").hide();
@@ -139,6 +133,7 @@ let agregarCards = (data) => {
                     $('#loader').show();
                 },
                 success: function(data, status, xhr) {
+                    $("#elementos").show();
                     infoAmpliada();
                     cargarImgPortada(data);
                     cargarDescripcion(data);
@@ -274,20 +269,20 @@ function cargarPlataformas(data) {
 
 
 
-
+let pageCatalogo = 1
 const verMas = document.querySelector(".verMas");
 verMas.addEventListener("click", (e) => {
     e.preventDefault();
-    page += 1;
+
     $.ajax({
-        url: 'https://api.rawg.io/api/games?page_size=21&page=' + page,
+        url: 'https://api.rawg.io/api/games?page_size=21&page=' + pageCatalogo,
         beforeSend: function() {
             $('.verMas').hide();
             $('#loader').show();
         },
         success: function(data, status, xhr) {
             agregarCards(data.results)
-
+            pageCatalogo += 1;
         },
         complete: function() {
             $("#loader").hide();
