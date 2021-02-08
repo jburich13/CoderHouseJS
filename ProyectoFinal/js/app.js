@@ -2,15 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
     $.ajax({
         url: 'https://api.rawg.io/api/games?page_size=21&page=' + page,
         beforeSend: function() {
-            $(".verMas").toggle()
+            $(".verMas").hide()
             $('#loader').show();
         },
         success: function(data, status, xhr) {
             agregarCards(data.results)
+            page += 1;
 
         },
         complete: function() {
-            $(".verMas").toggle();
+            $(".verMas").show();
             $("#loader").hide();
 
         },
@@ -32,19 +33,19 @@ const inputBuscador = document.querySelector("#buscador");
 
 form.addEventListener("submit", function(e) {
     e.preventDefault();
-    console.log(inputBuscador.value);
 
     $.ajax({
-        url: 'https://api.rawg.io/api/games?search_exact=true&search=' + inputBuscador.value + "&page_size=21" + "&page=" + page,
+        url: 'https://api.rawg.io/api/games?search_exact=true&search=' + inputBuscador.value + "&page_size=21" + "&page=1",
         beforeSend: function() {
             $("#elementos").remove();
             $(".card").hide();
             $('#loader').show();
+            $(".verMas").hide();
         },
         success: function(data, status, xhr) {
             agregarCards(data.results);
-            page += 1;
             $("#misCursos").show();
+            $(".verMas").hide();
 
         },
         complete: function() {
@@ -63,8 +64,7 @@ form.addEventListener("submit", function(e) {
 
 
 let agregarCards = (data) => {
-    console.log(data)
-        //Traigo el container
+    //Traigo el container
     const container = document.getElementById("misCursos");
     data.forEach(game => {
 
@@ -102,14 +102,6 @@ let agregarCards = (data) => {
         divBody.appendChild(descripcionCard);
 
 
-        const labelTiendas = document.createElement("h3")
-        labelTiendas.textContent = "Tiendas:";
-
-        divBody.appendChild(labelTiendas);
-
-
-
-
         //Agrego la linea de los botones
         const rowBotones = document.createElement("div");
         rowBotones.setAttribute("class", "row justify-content-center");
@@ -138,6 +130,7 @@ let agregarCards = (data) => {
                     cargarImgPortada(data);
                     cargarDescripcion(data);
                     cargarPlataformas(data);
+                    cargarTiendas(data);
                     loadBtn();
                 },
                 complete: function() {
@@ -226,7 +219,7 @@ function cargarDescripcion(data) {
     containerDescripcion.appendChild(titulo);
     containerDescripcion.appendChild(descripcion);
     elementos.appendChild(containerDescripcion);
-    $("#descripcion").hide();
+    $("#descripcion").hide()
 }
 
 function cargarPlataformas(data) {
@@ -263,31 +256,61 @@ function cargarPlataformas(data) {
     $(listaPlataformas).hide();
 }
 
+function cargarTiendas(data) {
+    const elementos = document.querySelector("#elementos")
+    const containerTiendas = document.createElement("div");
+    containerTiendas.setAttribute("id", "container-tiendas");
+    containerTiendas.setAttribute("class", "col-12  row justify-content-start");
+    const titulo = document.createElement("a");
+    const tiendas = document.createElement("p");
+    titulo.href = "#";
+    titulo.addEventListener("click", (e) => {
+        e.preventDefault()
+        $(listaTiendas).slideToggle("fast");
+    })
+    titulo.textContent = "Tiendas";
+    titulo.setAttribute("id", "titulo-tiendas")
+    titulo.setAttribute("class", "col-12 text-left")
+    tiendas.setAttribute("id", "tiendas");
+    let tiendasAPI = data.stores;
+    console.log("🚀 ~ data", data);
+    const listaTiendas = document.createElement("ul");
+    tiendasAPI.forEach(element => {
+        const tienda = document.createElement("li");
+        tienda.setAttribute("class", "col-12");
+        tienda.textContent = `${element.store.name}`;
+        listaTiendas.appendChild(tienda);
+    });
+
+
+    containerTiendas.appendChild(titulo);
+    containerTiendas.appendChild(tiendas);
+    containerTiendas.appendChild(listaTiendas);
+    elementos.appendChild(containerTiendas);
+    $(listaTiendas).hide();
+}
 
 
 
 
 
-
-let pageCatalogo = 1
 const verMas = document.querySelector(".verMas");
 verMas.addEventListener("click", (e) => {
     e.preventDefault();
-
     $.ajax({
-        url: 'https://api.rawg.io/api/games?page_size=21&page=' + pageCatalogo,
+        url: 'https://api.rawg.io/api/games?page_size=21&page=' + page,
         beforeSend: function() {
             $('.verMas').hide();
             $('#loader').show();
         },
         success: function(data, status, xhr) {
-            agregarCards(data.results)
-            pageCatalogo += 1;
+            agregarCards(data.results);
+            page += 1;
+
         },
         complete: function() {
             $("#loader").hide();
             $('.verMas').show();
-            verMas.scrollIntoView()
         },
         error: function(xhr, status, errorThrown) {
             console.log(xhr)

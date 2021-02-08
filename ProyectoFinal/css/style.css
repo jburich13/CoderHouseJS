@@ -166,10 +166,6 @@ li {
     margin: 1rem;
 }
 
-#container-plataforma {
-    justify-content: left;
-}
-
 #descripcion {
     font-size: 2rem;
     color: white;
@@ -192,6 +188,20 @@ li {
 }
 
 #titulo-plataforma {
+    font-size: 5rem;
+    color: white;
+    padding: 2rem;
+    text-align: justify;
+}
+
+#tiendas {
+    font-size: 2rem;
+    color: white;
+    padding: 2rem;
+    text-align: left;
+}
+
+#titulo-tiendas {
     font-size: 5rem;
     color: white;
     padding: 2rem;
