@@ -298,7 +298,7 @@ const verMas = document.querySelector(".verMas");
 verMas.addEventListener("click", (e) => {
     e.preventDefault();
     $.ajax({
-        url: 'https://api.rawg.io/api/games?page_size=21&page=' + page,
+        url: 'https://api.rawg.io/api/games?page_size=21&page=' + page+"&key=321e1d145ab647e691556aa01e720159",
         beforeSend: function() {
             $('.verMas').hide();
             $('#loader').show();
