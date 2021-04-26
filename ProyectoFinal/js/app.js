@@ -120,7 +120,7 @@ let agregarCards = (data) => {
             $("#misCursos").fadeOut()
             $("#verMas").fadeOut()
             $.ajax({
-                url: "https://api.rawg.io/api/games/" + botonCard.id,
+                url: "https://api.rawg.io/api/games/" + botonCard.id+"?key=321e1d145ab647e691556aa01e720159",
                 beforeSend: function() {
                     $('#loader').show();
                 },
