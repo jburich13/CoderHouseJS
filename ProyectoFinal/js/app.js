@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     $.ajax({
-        url: 'https://api.rawg.io/api/games?page_size=21&page=' + page,
+        url: 'https://api.rawg.io/api/games?page_size=21&page=' + page+"&key=321e1d145ab647e691556aa01e720159",
         beforeSend: function() {
             $(".verMas").hide()
             $('#loader').show();
@@ -35,7 +35,7 @@ form.addEventListener("submit", function(e) {
     e.preventDefault();
 
     $.ajax({
-        url: 'https://api.rawg.io/api/games?search_exact=true&search=' + inputBuscador.value + "&page_size=21" + "&page=1",
+        url: 'https://api.rawg.io/api/games?search_exact=true&search=' + inputBuscador.value + "&page_size=21" + "&page=1"+"&key=321e1d145ab647e691556aa01e720159",
         beforeSend: function() {
             $("#elementos").remove();
             $(".card").hide();
