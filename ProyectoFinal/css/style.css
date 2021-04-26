@@ -1,0 +1,268 @@
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #1A404F !important;
+    width: 100%;
+}
+
+
+/* Color Theme Swatches in Hex */
+
+.blanco {
+    color: #F5F5F5;
+}
+
+.verde {
+    color: #5DC457;
+}
+
+.azul {
+    color: #1A404F;
+}
+
+.negro {
+    color: #000000;
+}
+
+.celeste {
+    color: #9FC5E1;
+}
+
+#misCursos {
+    width: 100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#nav {
+    font-size: 2rem;
+    background-color: #9FC5E1;
+    margin: 0;
+    font-family: 'Arvo', serif;
+}
+
+li a {
+    color: #000000;
+}
+
+li:hover a {
+    color: #000000;
+}
+
+:focus {
+    outline: none;
+}
+
+li {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+#card {
+    margin: 5rem;
+    background-color: #9FC5E1;
+    width: 30rem;
+    align-content: center;
+}
+
+#card h5 {
+    font-family: 'Arvo', serif;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#card p {
+    font-size: 2rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#precio {
+    font-size: 3rem !important;
+}
+
+.boton {
+    display: inline;
+    text-align: center;
+    margin: 0.5rem;
+    background-color: #5DC457;
+    width: 20rem;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.5rem;
+    text-decoration: none !important;
+    color: #000000;
+}
+
+#boton:hover {
+    background-color: #96d693;
+}
+
+#precio {
+    font-size: 5rem;
+}
+
+.imgCarrito {
+    width: 3rem;
+    height: 3rem;
+}
+
+.numCarrito {
+    font-size: 2rem;
+    color: #000000;
+}
+
+.tituloModal {
+    font-size: 2rem;
+}
+
+.precioModal {
+    font-size: 2rem;
+}
+
+.imgModal {
+    height: 8rem;
+    width: 5rem;
+    border-radius: 10rem;
+}
+
+.itemsCarrito {
+    margin-bottom: 2rem;
+}
+
+.totalAPagar {
+    font-size: 2rem;
+}
+
+.labelTotal {
+    font-size: 2rem;
+}
+
+.titulo-seccion {
+    font-size: 5rem;
+}
+
+.img-card {
+    height: 20rem;
+    object-fit: cover;
+}
+
+.img-portada {
+    height: 70rem;
+    width: 150rem;
+    object-fit: cover;
+}
+
+.verMas {
+    font-size: 3rem;
+    background-color: #5DC457;
+    color: #000000;
+    text-decoration: none !important;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+#descripcion {
+    font-size: 2rem;
+    color: white;
+    padding: 2rem;
+    text-align: left;
+}
+
+#titulo-descripcion {
+    font-size: 5rem;
+    color: white;
+    padding: 2rem;
+    text-align: justify;
+}
+
+#plataformas {
+    font-size: 2rem;
+    color: white;
+    padding: 2rem;
+    text-align: left;
+}
+
+#titulo-plataforma {
+    font-size: 5rem;
+    color: white;
+    padding: 2rem;
+    text-align: justify;
+}
+
+#tiendas {
+    font-size: 2rem;
+    color: white;
+    padding: 2rem;
+    text-align: left;
+}
+
+#titulo-tiendas {
+    font-size: 5rem;
+    color: white;
+    padding: 2rem;
+    text-align: justify;
+}
+
+ul {
+    justify-content: left;
+    color: white;
+}
+
+li {
+    font-size: 3rem;
+    border: none;
+}
+
+#volver {
+    margin-top: 5rem;
+}
+
+.row {
+    margin: 0 !important;
+}
+
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
